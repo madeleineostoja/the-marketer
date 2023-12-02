@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqv07mtv0gmyy"]
+
+[ext_resource type="Script" path="res://scenes/world/world.gd" id="1_5bcam"]
+[ext_resource type="PackedScene" uid="uid://dpuqjselwv7r8" path="res://scenes/map/map.tscn" id="1_6j0py"]
+[ext_resource type="PackedScene" uid="uid://b4vvrcbdysivt" path="res://scenes/player/player.tscn" id="2_a5tn5"]
+
+[sub_resource type="Curve2D" id="Curve2D_1xe7k"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1757, -906, 0, 0, 0, 0, 2915, -902, 0, 0, 0, 0, 2916, 2040, 0, 0, 0, 0, -1764, 2049, 0, 0, 0, 0, -1757, -906)
+}
+point_count = 5
+
+[node name="World" type="Node2D"]
+position = Vector2(632, 424)
+script = ExtResource("1_5bcam")
+metadata/_edit_group_ = true
+
+[node name="Map" parent="." instance=ExtResource("1_6j0py")]
+position = Vector2(-670, -138)
+scale = Vector2(4, 4)
+
+[node name="Player" parent="." instance=ExtResource("2_a5tn5")]
+position = Vector2(288, 212)
+
+[node name="SpawnRate" type="Timer" parent="."]
+
+[node name="SpawnPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_1xe7k")
+
+[node name="SpawnPathLocation" type="PathFollow2D" parent="SpawnPath"]
+position = Vector2(-1757, -906)
+rotation = 0.000856164
+
+[node name="DifficultyIncrease" type="Timer" parent="."]
+
+[connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="timeout" from="SpawnRate" to="." method="_on_spawn_rate_timeout"]
+[connection signal="timeout" from="DifficultyIncrease" to="." method="_on_difficulty_increase_timeout"]
+[connection signal="timeout" from="DifficultyIncrease" to="." method="_on_survival_timer_timeout"]
