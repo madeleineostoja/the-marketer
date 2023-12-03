@@ -38,6 +38,7 @@ func hit():
 	character.hide()
 	$Death.show()
 	$Death.play()
+	$DeathSound.play()
 	killed.emit()
 	await Utils.timeout(self, 1)
 	queue_free()

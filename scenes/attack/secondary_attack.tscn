@@ -1,27 +1,27 @@
 [gd_scene load_steps=11 format=3 uid="uid://btn35qgs40hn6"]
 
 [ext_resource type="Script" path="res://scenes/attack/secondary_attack.gd" id="1_wsxs2"]
-[ext_resource type="Texture2D" uid="uid://dkcvt21w0uf77" path="res://scenes/attack/assets/attack.png" id="2_un4yn"]
+[ext_resource type="Texture2D" uid="uid://dkcvt21w0uf77" path="res://scenes/attack/assets/attack.png" id="2_wjuek"]
 [ext_resource type="AudioStream" uid="uid://yuh6n1lj324v" path="res://scenes/attack/assets/attack2.ogg" id="3_pj2aq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w878t"]
-atlas = ExtResource("2_un4yn")
+atlas = ExtResource("2_wjuek")
 region = Rect2(320, 576, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4tjky"]
-atlas = ExtResource("2_un4yn")
+atlas = ExtResource("2_wjuek")
 region = Rect2(384, 576, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2166i"]
-atlas = ExtResource("2_un4yn")
+atlas = ExtResource("2_wjuek")
 region = Rect2(448, 576, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q5a0y"]
-atlas = ExtResource("2_un4yn")
+atlas = ExtResource("2_wjuek")
 region = Rect2(512, 576, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jd8lf"]
-atlas = ExtResource("2_un4yn")
+atlas = ExtResource("2_wjuek")
 region = Rect2(576, 576, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5s4h4"]
