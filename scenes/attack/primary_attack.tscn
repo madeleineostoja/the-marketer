@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3wn0gkxm4pr2"]
+[gd_scene load_steps=10 format=3 uid="uid://b3wn0gkxm4pr2"]
 
 [ext_resource type="Script" path="res://scenes/attack/primary_attack.gd" id="1_253wa"]
-[ext_resource type="Texture2D" uid="uid://dkcvt21w0uf77" path="res://scenes/attack/attack.png" id="2_sjanl"]
+[ext_resource type="Texture2D" uid="uid://dkcvt21w0uf77" path="res://scenes/attack/assets/attack.png" id="2_sjanl"]
+[ext_resource type="AudioStream" uid="uid://cixclms3ayi2f" path="res://scenes/attack/assets/attack1.ogg" id="3_b7y7e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5w8bd"]
 atlas = ExtResource("2_sjanl")
@@ -43,10 +44,11 @@ animations = [{
 radius = 19.0
 height = 56.0
 
-[node name="PrimaryAttack" type="Area2D" node_paths=PackedStringArray("animation")]
+[node name="PrimaryAttack" type="Area2D" node_paths=PackedStringArray("animation", "sound")]
 scale = Vector2(3, 3)
 script = ExtResource("1_253wa")
 animation = NodePath("AnimatedSprite2D")
+sound = NodePath("AudioStreamPlayer2D")
 speed = 300
 metadata/_edit_group_ = true
 
@@ -57,5 +59,8 @@ animation = &"attack"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 0)
 shape = SubResource("CapsuleShape2D_hm7jp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_b7y7e")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -2,6 +2,7 @@ extends Area2D
 class_name Attack
 
 @export var animation: AnimatedSprite2D
+@export var sound: AudioStreamPlayer2D
 @export var speed: int
 @export var direction: Vector2
 
@@ -9,6 +10,8 @@ class_name Attack
 func _ready():
 	if animation:
 		animation.play()
+	if sound:
+		sound.play()
 	await get_tree().create_timer(0.5).timeout
 	queue_free()
 

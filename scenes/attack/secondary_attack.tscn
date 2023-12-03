@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://btn35qgs40hn6"]
+[gd_scene load_steps=11 format=3 uid="uid://btn35qgs40hn6"]
 
 [ext_resource type="Script" path="res://scenes/attack/secondary_attack.gd" id="1_wsxs2"]
-[ext_resource type="Texture2D" uid="uid://dkcvt21w0uf77" path="res://scenes/attack/attack.png" id="2_un4yn"]
+[ext_resource type="Texture2D" uid="uid://dkcvt21w0uf77" path="res://scenes/attack/assets/attack.png" id="2_un4yn"]
+[ext_resource type="AudioStream" uid="uid://yuh6n1lj324v" path="res://scenes/attack/assets/attack2.ogg" id="3_pj2aq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w878t"]
 atlas = ExtResource("2_un4yn")
@@ -50,9 +51,10 @@ animations = [{
 radius = 14.0
 height = 40.0
 
-[node name="SecondaryAttack" type="Area2D" node_paths=PackedStringArray("animation")]
+[node name="SecondaryAttack" type="Area2D" node_paths=PackedStringArray("animation", "sound")]
 script = ExtResource("1_wsxs2")
 animation = NodePath("AnimatedSprite2D")
+sound = NodePath("AudioStreamPlayer2D")
 speed = 1500
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -64,5 +66,8 @@ frame_progress = 0.782803
 position = Vector2(2, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_dwd1r")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_pj2aq")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
