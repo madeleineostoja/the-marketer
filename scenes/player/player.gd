@@ -1,12 +1,15 @@
 extends CharacterBody2D
 
 @export var state: State = State.IDLE
+@export var movement: Vector2 = Vector2.ZERO
 @export var direction: Vector2 = Vector2.DOWN
+
+const Utils = preload("res://lib/utils.gd")
 
 enum State { IDLE, WALK, ROLL, PRIMARY_ATTACK, SECONDARY_ATTACK, DEAD }
 
-const WALK_SPEED: int = 400
-const ROLL_SPEED: int = 800
+const WALK_SPEED: int = 450
+const ROLL_SPEED: int = 1000
 
 signal died
 signal attacked(primary: bool, direction: Vector2, position: Vector2)
@@ -47,7 +50,9 @@ func update_direction():
 		input_buffer.erase(Vector2.DOWN)
 
 	input_buffer_readout = input_buffer[-1]
-	direction = input_buffer_readout
+	movement = input_buffer_readout
+	if (input_buffer_readout != Vector2.ZERO):
+		direction = input_buffer_readout
 
 
 func idle():
@@ -57,35 +62,40 @@ func idle():
 
 func walk():
 	animate("walk")
-	velocity = direction * WALK_SPEED
+	velocity = movement * WALK_SPEED
 
 
 func roll():
 	animate("roll")
 	velocity = direction * ROLL_SPEED
-	await get_tree().create_timer(0.5).timeout
+	set_process_input(false)
+	await Utils.timeout(self, 0.35)
+	set_process_input(true)
 	state = State.IDLE
 
 
 func attack(primary: bool):
 	animate("attack")
 	attacked.emit(primary, direction, position)
-	await get_tree().create_timer(0.25).timeout
+	await Utils.timeout(self, 0.25)
 	state = State.IDLE
 
 
 func die():
 	velocity = Vector2.ZERO
-	set_process_input(false)
 	$AnimatedSprite2D.play("death")
-	await get_tree().create_timer(1.0).timeout
+	set_process_input(false)
+	await Utils.timeout(self, 2)
 	died.emit()
 
 
 func die_on_impact():
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
-		if collision.get_collider().is_in_group("enemies"):
+		var body = collision.get_collider()
+		if !body.is_in_group("enemies"):
+			return 
+		if state != State.ROLL:
 			state = State.DEAD
 
 
@@ -100,18 +110,18 @@ func _physics_process(_delta):
 		state = State.WALK
 
 	match state:
-		State.IDLE:
-			idle()
-		State.WALK:
-			walk()
-		State.ROLL:
-			roll()
 		State.PRIMARY_ATTACK:
 			attack(true)
 		State.SECONDARY_ATTACK:
 			attack(false)
+		State.ROLL:
+			roll()
+		State.WALK:
+			walk()
 		State.DEAD:
 			die()
+		State.IDLE:
+			idle()
 
 
 func _input(event):

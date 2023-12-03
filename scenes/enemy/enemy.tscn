@@ -3,7 +3,9 @@
 [ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_hxphg"]
 [ext_resource type="Texture2D" uid="uid://cp2aeulthv8b2" path="res://scenes/enemy/enemy.png" id="1_yvei7"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_k6xdk"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dl217"]
+radius = 6.90909
+height = 18.1818
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_efdw2"]
 atlas = ExtResource("1_yvei7")
@@ -1356,16 +1358,17 @@ animations = [{
 }]
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+z_index = 1
 position = Vector2(2, 0)
 scale = Vector2(2.75, 2.75)
 script = ExtResource("1_hxphg")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_k6xdk")
+z_index = 1
+shape = SubResource("CapsuleShape2D_dl217")
 
 [node name="Character1" type="AnimatedSprite2D" parent="."]
-visible = false
 sprite_frames = SubResource("SpriteFrames_tuhxv")
 animation = &"down"
 

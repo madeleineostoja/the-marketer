@@ -28,7 +28,7 @@ func spawn():
 func hit():
 	killed.emit()
 	queue_free()
-
+	
 
 func walk(movement: Vector2):
 	var direction = movement.normalized().snapped(Vector2.ONE)

@@ -70,7 +70,9 @@
 [ext_resource type="Texture2D" uid="uid://cm42pyatetm4n" path="res://scenes/player/sprites/walk/walk up3.png" id="67_xhw5o"]
 [ext_resource type="Texture2D" uid="uid://bwrg5ounkkk0y" path="res://scenes/player/sprites/walk/walk up4.png" id="68_tb7yi"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_n70ny"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_25erg"]
+radius = 5.5
+height = 17.5
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mls1n"]
 animations = [{
@@ -89,7 +91,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack-down",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -106,7 +108,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack-left",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -123,7 +125,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack-right",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -140,7 +142,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack-up",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -157,7 +159,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"death",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -242,7 +244,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"roll-down",
-"speed": 8.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -259,7 +261,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"roll-left",
-"speed": 8.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -276,7 +278,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"roll-right",
-"speed": 8.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -293,7 +295,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"roll-up",
-"speed": 8.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -368,16 +370,17 @@ animations = [{
 position = Vector2(-23, 10)
 scale = Vector2(4, 4)
 script = ExtResource("1_r2iuf")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_n70ny")
+z_index = 1
+shape = SubResource("CapsuleShape2D_25erg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(0, 0.25)
 sprite_frames = SubResource("SpriteFrames_mls1n")
-animation = &"attack-down"
-frame = 3
-frame_progress = 1.0
+animation = &"idle-down"
+autoplay = "idle-down"
 
 [node name="Camera" type="Camera2D" parent="."]
 

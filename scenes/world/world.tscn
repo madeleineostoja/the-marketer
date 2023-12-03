@@ -33,6 +33,7 @@ rotation = 0.000856164
 
 [node name="DifficultyIncrease" type="Timer" parent="."]
 
+[connection signal="attacked" from="Player" to="." method="_on_player_attacked"]
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="timeout" from="SpawnRate" to="." method="_on_spawn_rate_timeout"]
 [connection signal="timeout" from="DifficultyIncrease" to="." method="_on_difficulty_increase_timeout"]
