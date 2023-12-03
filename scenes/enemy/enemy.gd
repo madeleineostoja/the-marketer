@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-const Utils = preload("res://lib/utils.gd");
+const Utils = preload("res://lib/utils.gd")
 
-enum State {ALIVE,DEAD}
-var state: State = State.ALIVE;
+enum State { ALIVE, DEAD }
+@export var state: State = State.ALIVE
 
 signal killed
 
@@ -30,8 +30,10 @@ func spawn():
 	character.show()
 
 
-func hit():
+func hit(): 
 	state = State.DEAD
+	velocity = Vector2.ZERO
+	$CollisionShape2D.set_deferred("disabled", true)
 	character.stop()
 	character.hide()
 	$Death.show()
@@ -39,12 +41,12 @@ func hit():
 	killed.emit()
 	await Utils.timeout(self, 1)
 	queue_free()
-	
+
 
 func walk(movement: Vector2):
 	var direction = movement.normalized().snapped(Vector2.ONE)
 
-	if (state == State.ALIVE):
+	if state == State.ALIVE:
 		velocity = movement * SPEED
 
 	match direction:
