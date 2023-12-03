@@ -1,7 +1,8 @@
-[gd_scene load_steps=174 format=3 uid="uid://ujgj1lb7mogm"]
+[gd_scene load_steps=184 format=3 uid="uid://ujgj1lb7mogm"]
 
 [ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_hxphg"]
 [ext_resource type="Texture2D" uid="uid://cp2aeulthv8b2" path="res://scenes/enemy/enemy.png" id="1_yvei7"]
+[ext_resource type="Texture2D" uid="uid://jiouc2uq5sc2" path="res://assets/effects.png" id="3_eglhd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dl217"]
 radius = 6.90909
@@ -1357,6 +1358,70 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpdvy"]
+atlas = ExtResource("3_eglhd")
+region = Rect2(0, 640, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hq0a7"]
+atlas = ExtResource("3_eglhd")
+region = Rect2(64, 640, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tuvg"]
+atlas = ExtResource("3_eglhd")
+region = Rect2(128, 640, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eg4fx"]
+atlas = ExtResource("3_eglhd")
+region = Rect2(192, 640, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5lt2"]
+atlas = ExtResource("3_eglhd")
+region = Rect2(256, 640, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7toj"]
+atlas = ExtResource("3_eglhd")
+region = Rect2(320, 640, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnhfo"]
+atlas = ExtResource("3_eglhd")
+region = Rect2(384, 640, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6ber"]
+atlas = ExtResource("3_eglhd")
+region = Rect2(448, 640, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_02nem"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpdvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hq0a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0tuvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eg4fx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5lt2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7toj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnhfo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6ber")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
+}]
+
 [node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
 z_index = 1
 position = Vector2(2, 0)
@@ -1369,6 +1434,7 @@ z_index = 1
 shape = SubResource("CapsuleShape2D_dl217")
 
 [node name="Character1" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_tuhxv")
 animation = &"down"
 
@@ -1417,3 +1483,8 @@ visible = false
 sprite_frames = SubResource("SpriteFrames_tm7j0")
 animation = &"down"
 frame_progress = 0.301578
+
+[node name="Death" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_02nem")
+animation = &"death"

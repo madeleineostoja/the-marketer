@@ -1,5 +1,10 @@
 extends CharacterBody2D
 
+const Utils = preload("res://lib/utils.gd");
+
+enum State {ALIVE,DEAD}
+var state: State = State.ALIVE;
+
 signal killed
 
 const SPEED: int = 150
@@ -26,14 +31,21 @@ func spawn():
 
 
 func hit():
+	state = State.DEAD
+	character.stop()
+	character.hide()
+	$Death.show()
+	$Death.play()
 	killed.emit()
+	await Utils.timeout(self, 1)
 	queue_free()
 	
 
 func walk(movement: Vector2):
 	var direction = movement.normalized().snapped(Vector2.ONE)
 
-	velocity = movement * SPEED
+	if (state == State.ALIVE):
+		velocity = movement * SPEED
 
 	match direction:
 		Vector2.UP:
