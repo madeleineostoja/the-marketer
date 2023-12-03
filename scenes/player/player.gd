@@ -68,6 +68,7 @@ func walk():
 
 func roll():
 	animate("roll")
+	$RollSound.play()
 	velocity = direction * ROLL_SPEED
 	set_process_input(false)
 	await Utils.timeout(self, 0.35)

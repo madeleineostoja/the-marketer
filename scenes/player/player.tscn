@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://b4vvrcbdysivt"]
+[gd_scene load_steps=74 format=3 uid="uid://b4vvrcbdysivt"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_r2iuf"]
 [ext_resource type="Texture2D" uid="uid://b8a76xsu7vhhy" path="res://scenes/player/assets/sprites/attack/attack down1.png" id="2_f8mub"]
@@ -70,6 +70,7 @@
 [ext_resource type="Texture2D" uid="uid://cm42pyatetm4n" path="res://scenes/player/assets/sprites/walk/walk up3.png" id="68_v8qnq"]
 [ext_resource type="Texture2D" uid="uid://bwrg5ounkkk0y" path="res://scenes/player/assets/sprites/walk/walk up4.png" id="69_4p0wq"]
 [ext_resource type="AudioStream" uid="uid://cnlbmgg05y1fx" path="res://scenes/player/assets/death.mp3" id="70_33rui"]
+[ext_resource type="AudioStream" uid="uid://cplif02jxdpby" path="res://scenes/player/assets/roll.ogg" id="71_8hvit"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_25erg"]
 radius = 5.5
@@ -387,5 +388,8 @@ autoplay = "idle-down"
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("70_33rui")
+
+[node name="RollSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("71_8hvit")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
