@@ -121,6 +121,9 @@ func _physics_process(_delta):
 
 
 func _unhandled_input(event):
+	if (state == State.DEAD):
+		return
+		
 	if event.is_action_pressed("primary_attack"):
 		state = State.PRIMARY_ATTACK
 		attack(true)
