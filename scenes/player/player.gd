@@ -51,7 +51,7 @@ func update_direction():
 
 	input_buffer_readout = input_buffer[-1]
 	movement = input_buffer_readout
-	if (input_buffer_readout != Vector2.ZERO):
+	if input_buffer_readout != Vector2.ZERO:
 		direction = input_buffer_readout
 
 
@@ -82,20 +82,24 @@ func attack(primary: bool):
 
 
 func die():
+	print('DYING')
 	velocity = Vector2.ZERO
 	$AnimatedSprite2D.play("death")
+	$DeathSound.play()
 	set_process_input(false)
 	await Utils.timeout(self, 2)
 	died.emit()
 
 
 func die_on_impact():
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var body = collision.get_collider()
-		if !body.is_in_group("enemies"):
-			return 
-		if state != State.ROLL:
+	if (state != State.DEAD):
+		for i in get_slide_collision_count():
+			var collision = get_slide_collision(i)
+			var body = collision.get_collider()
+			if !body.is_in_group("enemies") || state == State.ROLL:
+				return
+
+			die()
 			state = State.DEAD
 
 
@@ -110,26 +114,21 @@ func _physics_process(_delta):
 		state = State.WALK
 
 	match state:
-		State.PRIMARY_ATTACK:
-			attack(true)
-		State.SECONDARY_ATTACK:
-			attack(false)
-		State.ROLL:
-			roll()
 		State.WALK:
 			walk()
-		State.DEAD:
-			die()
 		State.IDLE:
 			idle()
 
 
-func _input(event):
-	if event.is_action("primary_attack"):
+func _unhandled_input(event):
+	if event.is_action_pressed("primary_attack"):
 		state = State.PRIMARY_ATTACK
+		attack(true)
 
-	if event.is_action("secondary_attack"):
+	if event.is_action_pressed("secondary_attack"):
 		state = State.SECONDARY_ATTACK
+		attack(false)
 
-	if event.is_action("roll"):
+	if event.is_action_pressed("roll"):
 		state = State.ROLL
+		roll()
