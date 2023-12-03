@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqv07mtv0gmyy"]
+[gd_scene load_steps=6 format=3 uid="uid://dqv07mtv0gmyy"]
 
 [ext_resource type="Script" path="res://scenes/world/world.gd" id="1_5bcam"]
 [ext_resource type="PackedScene" uid="uid://dpuqjselwv7r8" path="res://scenes/map/map.tscn" id="1_6j0py"]
 [ext_resource type="PackedScene" uid="uid://b4vvrcbdysivt" path="res://scenes/player/player.tscn" id="2_a5tn5"]
+[ext_resource type="AudioStream" uid="uid://chp7qtixorcyh" path="res://assets/music.mp3" id="4_0voo0"]
 
 [sub_resource type="Curve2D" id="Curve2D_1xe7k"]
 _data = {
@@ -33,8 +34,13 @@ rotation = 0.000856164
 
 [node name="DifficultyIncrease" type="Timer" parent="."]
 
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_0voo0")
+volume_db = -10.0
+
 [connection signal="attacked" from="Player" to="." method="_on_player_attacked"]
 [connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="dying" from="Player" to="." method="_on_player_dying"]
 [connection signal="timeout" from="SpawnRate" to="." method="_on_spawn_rate_timeout"]
 [connection signal="timeout" from="DifficultyIncrease" to="." method="_on_survival_timer_timeout"]
 [connection signal="timeout" from="DifficultyIncrease" to="." method="_on_difficulty_increase_timeout"]

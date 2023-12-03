@@ -24,6 +24,7 @@ func spawn_attack(primary: bool, direction: Vector2, position:Vector2):
 	add_child(attack)
 
 func start_game():
+	$BackgroundMusic.play()
 	$SpawnRate.start()
 	$DifficultyIncrease.start()
 
@@ -53,3 +54,7 @@ func _on_player_died():
 
 func _on_player_attacked(primary, direction, position):
 	spawn_attack(primary, direction, position)
+
+
+func _on_player_dying():
+	$BackgroundMusic.stop()

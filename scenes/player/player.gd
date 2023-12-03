@@ -12,6 +12,7 @@ const WALK_SPEED: int = 450
 const ROLL_SPEED: int = 1000
 
 signal died
+signal dying
 signal attacked(primary: bool, direction: Vector2, position: Vector2)
 
 var input_buffer = [Vector2.ZERO]
@@ -82,8 +83,8 @@ func attack(primary: bool):
 
 
 func die():
-	print('DYING')
 	velocity = Vector2.ZERO
+	dying.emit()
 	$AnimatedSprite2D.play("death")
 	$DeathSound.play()
 	set_process_input(false)
@@ -92,7 +93,7 @@ func die():
 
 
 func die_on_impact():
-	if (state != State.DEAD):
+	if state != State.DEAD:
 		for i in get_slide_collision_count():
 			var collision = get_slide_collision(i)
 			var body = collision.get_collider()
@@ -121,9 +122,9 @@ func _physics_process(_delta):
 
 
 func _unhandled_input(event):
-	if (state == State.DEAD):
+	if state == State.DEAD:
 		return
-		
+
 	if event.is_action_pressed("primary_attack"):
 		state = State.PRIMARY_ATTACK
 		attack(true)
