@@ -1,11 +1,12 @@
 extends CharacterBody2D
 
+@onready var global = get_node('/root/Global') 
+
 const Utils = preload("res://lib/utils.gd")
 
 enum State { ALIVE, DEAD }
 @export var state: State = State.ALIVE
 
-signal killed
 
 const SPEED: int = 150
 @onready var characters := [
@@ -39,7 +40,7 @@ func hit():
 	$Death.show()
 	$Death.play()
 	$DeathSound.play()
-	killed.emit()
+	global.score += 1
 	await Utils.timeout(self, 1)
 	queue_free()
 

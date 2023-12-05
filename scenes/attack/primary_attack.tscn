@@ -45,7 +45,7 @@ radius = 19.0
 height = 56.0
 
 [node name="PrimaryAttack" type="Area2D" node_paths=PackedStringArray("animation", "sound")]
-scale = Vector2(3, 3)
+scale = Vector2(3.5, 3.5)
 script = ExtResource("1_253wa")
 animation = NodePath("AnimatedSprite2D")
 sound = NodePath("AudioStreamPlayer2D")

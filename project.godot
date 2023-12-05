@@ -16,14 +16,23 @@ config/description="In a world gone mad with angry consumers, only one person ca
 The Marketer drops you into this world, where you must use your weapons of marketing campaigns to convert angry mobs into happy customers. Find brand tracking power ups to increase your effectiveness, and survive as long as you can"
 run/main_scene="res://scenes/world/world.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-boot_splash/bg_color=Color(0, 0, 0, 1)
-boot_splash/show_image=false
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/image="res://assets/splash.png"
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://state/global.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+
+[gui]
+
+theme/custom_font="res://assets/font.ttf"
 
 [input]
 
