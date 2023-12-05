@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var global = get_node('/root/Global') 
+@onready var Global = get_node('/root/Global') 
 
 const Utils = preload("res://lib/utils.gd")
 
@@ -40,7 +40,7 @@ func hit():
 	$Death.show()
 	$Death.play()
 	$DeathSound.play()
-	global.score += 1
+	Global.score += 1
 	await Utils.timeout(self, 1)
 	queue_free()
 
