@@ -7,4 +7,4 @@ func _ready():
 	$Restart.grab_focus()
 
 func _on_restart_pressed():
-	pass
+	get_tree().change_scene_to_file('res://scenes/title/title.tscn')

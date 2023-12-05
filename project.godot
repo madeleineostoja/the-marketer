@@ -14,7 +14,7 @@ config/name="The Marketer"
 config/description="In a world gone mad with angry consumers, only one person can save us!
 
 The Marketer drops you into this world, where you must use your weapons of marketing campaigns to convert angry mobs into happy customers. Find brand tracking power ups to increase your effectiveness, and survive as long as you can"
-run/main_scene="res://scenes/world/world.tscn"
+run/main_scene="res://scenes/title/title.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/bg_color=Color(1, 1, 1, 1)
 boot_splash/image="res://assets/splash.png"

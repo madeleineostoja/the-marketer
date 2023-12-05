@@ -3,7 +3,6 @@ extends Node2D
 const Enemy = preload("res://scenes/enemy/enemy.tscn")
 const PrimaryAttack = preload("res://scenes/attack/primary_attack.tscn")
 const SecondaryAttack = preload("res://scenes/attack/secondary_attack.tscn")
-const GameOver = preload('res://scenes/game-over/game_over.tscn')
 
 
 func spawn_enemy():
@@ -31,13 +30,7 @@ func start_game():
 
 
 func game_over():
-	var gameover = GameOver.instantiate()
-	$SpawnRate.stop()
-	$DifficultyIncrease.stop()
-	get_tree().call_group("enemies", "queue_free")
-	$Player.queue_free()
-	add_child(gameover)
-
+	get_tree().change_scene_to_file('res://scenes/game-over/game_over.tscn')
 
 func _ready():
 	start_game()
