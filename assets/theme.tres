@@ -11,17 +11,7 @@ corner_radius_top_right = 999
 corner_radius_bottom_right = 999
 corner_radius_bottom_left = 999
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8db81"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.980392, 0.980392, 0.980392, 1)
-corner_radius_top_left = 999
-corner_radius_top_right = 999
-corner_radius_bottom_right = 999
-corner_radius_bottom_left = 999
-corner_detail = 5
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wrg3a"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ldaw3"]
 
@@ -58,6 +48,6 @@ Button/font_sizes/font_size = 36
 Button/fonts/font = ExtResource("1_ufwe4")
 Button/styles/disabled = SubResource("StyleBoxEmpty_7ekoo")
 Button/styles/focus = SubResource("StyleBoxFlat_nngyc")
-Button/styles/hover = SubResource("StyleBoxFlat_8db81")
+Button/styles/hover = SubResource("StyleBoxEmpty_wrg3a")
 Button/styles/normal = SubResource("StyleBoxEmpty_ldaw3")
 Button/styles/pressed = SubResource("StyleBoxFlat_48p1x")
