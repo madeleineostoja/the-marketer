@@ -13,8 +13,8 @@ config_version=5
 config/name="The Marketer"
 config/description="In a world gone mad with angry consumers, only one person can save us!
 
-The Marketer drops you into this world, where you must use your weapons of marketing campaigns to convert angry mobs into happy customers. Find brand tracking power ups to increase your effectiveness, and survive as long as you can"
-run/main_scene="res://scenes/title/title.tscn"
+The Marketer is an arcade-style horde survival game, where you play a marketer in a world gone mad with angry consumers. Use your joint performance and brand marketing weapons to convert them to happy customers, and survive."
+run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/bg_color=Color(1, 1, 1, 1)
 boot_splash/image="res://assets/splash.png"
@@ -24,11 +24,18 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://state/global.gd"
+SceneManager="*res://addons/scene_manager/SceneManager.tscn"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/scene_manager/plugin.cfg")
 
 [gui]
 
