@@ -1,16 +1,17 @@
 [gd_scene load_steps=6 format=3 uid="uid://bdefdphb313k0"]
 
-[ext_resource type="Script" path="res://scenes/title/title.gd" id="1_7ju6l"]
-[ext_resource type="PackedScene" uid="uid://dpuqjselwv7r8" path="res://scenes/map/map.tscn" id="1_hgtn0"]
-[ext_resource type="Theme" uid="uid://rthwx2j2hbgc" path="res://assets/theme.tres" id="3_3ftfe"]
+[ext_resource type="Script" path="res://scenes/menu/menu.gd" id="1_isw0c"]
+[ext_resource type="PackedScene" uid="uid://dpuqjselwv7r8" path="res://scenes/map/map.tscn" id="2_1n44p"]
+[ext_resource type="Theme" uid="uid://rthwx2j2hbgc" path="res://assets/theme.tres" id="3_d3jc0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_klygr"]
 font_size = 128
 
 [sub_resource type="Shortcut" id="Shortcut_hqsfn"]
 
-[node name="Title" type="CanvasLayer"]
-script = ExtResource("1_7ju6l")
+[node name="Title" type="CanvasLayer" groups=["scene_manager_entity_nodes"]]
+script = ExtResource("1_isw0c")
+metadata/entity_name = "Title"
 
 [node name="Heading" type="Label" parent="."]
 z_index = 110
@@ -37,7 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.392157)
 
-[node name="Map" parent="." instance=ExtResource("1_hgtn0")]
+[node name="Map" parent="." instance=ExtResource("2_1n44p")]
 
 [node name="Start" type="Button" parent="."]
 z_index = 110
@@ -52,7 +53,7 @@ offset_right = 193.5
 offset_bottom = 229.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("3_3ftfe")
+theme = ExtResource("3_d3jc0")
 theme_override_font_sizes/font_size = 48
 shortcut = SubResource("Shortcut_hqsfn")
 text = "New Game"
