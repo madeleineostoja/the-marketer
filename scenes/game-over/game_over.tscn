@@ -13,8 +13,9 @@ font_color = Color(0.67451, 0.67451, 0.67451, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_fauf5"]
 font_size = 120
 
-[node name="GameOver" type="CanvasLayer"]
+[node name="GameOver" type="CanvasLayer" groups=["scene_manager_entity_nodes"]]
 script = ExtResource("1_r55b5")
+metadata/entity_name = "GameOver"
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15

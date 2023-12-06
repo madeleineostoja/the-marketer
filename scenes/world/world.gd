@@ -30,7 +30,13 @@ func start_game():
 
 
 func game_over():
-	get_tree().change_scene_to_file('res://scenes/game-over/game_over.tscn')
+	SceneManager.change_scene('res://scenes/game-over/game_over.tscn', {
+		"wait_time": 0,
+		"speed": 1,
+		"pattern": "radial",
+		"pattern_leave": "fade",
+		"invert_on_leave": false
+	})
 
 func _ready():
 	start_game()

@@ -12,10 +12,11 @@ _data = {
 }
 point_count = 5
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" groups=["scene_manager_entity_nodes"]]
 position = Vector2(632, 424)
 script = ExtResource("1_5bcam")
 metadata/_edit_group_ = true
+metadata/entity_name = "World"
 
 [node name="Map" parent="." instance=ExtResource("1_6j0py")]
 position = Vector2(-670, -138)

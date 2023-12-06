@@ -6,5 +6,8 @@ func _ready():
 	$Score.text = str(global.score)
 	$Restart.grab_focus()
 
-func _on_restart_pressed():
-	get_tree().change_scene_to_file('res://scenes/title/title.tscn')
+func _on_restart_pressed(): 
+	SceneManager.change_scene('res://scenes/menu/menu.tscn', {
+		"speed": 5,
+		"wait_time": 0,
+	})
