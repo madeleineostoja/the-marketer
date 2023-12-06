@@ -40,7 +40,7 @@ func game_over():
 
 func _ready():
 	start_game()
-	for i in range(10):
+	for i in range(25):
 		spawn_enemy()
 
 
