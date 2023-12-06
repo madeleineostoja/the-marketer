@@ -40,6 +40,25 @@ color = Color(0, 0, 0, 0.392157)
 
 [node name="Map" parent="." instance=ExtResource("2_1n44p")]
 
+[node name="Exit" type="Button" parent="."]
+z_index = 110
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.5
+offset_top = 279.5
+offset_right = 193.5
+offset_bottom = 398.5
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_top = NodePath("../Start")
+theme = ExtResource("3_d3jc0")
+theme_override_font_sizes/font_size = 48
+shortcut = SubResource("Shortcut_hqsfn")
+text = "Exit"
+
 [node name="Start" type="Button" parent="."]
 z_index = 110
 anchors_preset = 8
@@ -53,9 +72,11 @@ offset_right = 193.5
 offset_bottom = 229.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_neighbor_bottom = NodePath("../Exit")
 theme = ExtResource("3_d3jc0")
 theme_override_font_sizes/font_size = 48
 shortcut = SubResource("Shortcut_hqsfn")
 text = "New Game"
 
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
