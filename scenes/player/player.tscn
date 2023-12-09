@@ -392,4 +392,9 @@ stream = ExtResource("70_33rui")
 [node name="RollSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("71_8hvit")
 
+[node name="AttackCooldown" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.4
+one_shot = true
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

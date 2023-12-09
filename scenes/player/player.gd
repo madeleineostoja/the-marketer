@@ -15,8 +15,8 @@ signal died
 signal dying
 signal attacked(primary: bool, direction: Vector2, position: Vector2)
 
-var input_buffer = [Vector2.ZERO]
-var input_buffer_readout = Vector2()
+var movement_buffer = [Vector2.ZERO]
+var movement_buffer_readout = Vector2()
 
 
 func animate(animation: String):
@@ -31,29 +31,29 @@ func animate(animation: String):
 			$AnimatedSprite2D.play("%s-left" % animation)
 
 
-func update_direction():
+func handle_movement():
 	if Input.is_action_just_pressed("right"):
-		input_buffer.append(Vector2.RIGHT)
+		movement_buffer.append(Vector2.RIGHT)
 	elif Input.is_action_just_pressed("left"):
-		input_buffer.append(Vector2.LEFT)
+		movement_buffer.append(Vector2.LEFT)
 	elif Input.is_action_just_pressed("up"):
-		input_buffer.append(Vector2.UP)
+		movement_buffer.append(Vector2.UP)
 	elif Input.is_action_just_pressed("down"):
-		input_buffer.append(Vector2.DOWN)
+		movement_buffer.append(Vector2.DOWN)
 
 	if Input.is_action_just_released("right"):
-		input_buffer.erase(Vector2.RIGHT)
+		movement_buffer.erase(Vector2.RIGHT)
 	elif Input.is_action_just_released("left"):
-		input_buffer.erase(Vector2.LEFT)
+		movement_buffer.erase(Vector2.LEFT)
 	elif Input.is_action_just_released("up"):
-		input_buffer.erase(Vector2.UP)
+		movement_buffer.erase(Vector2.UP)
 	elif Input.is_action_just_released("down"):
-		input_buffer.erase(Vector2.DOWN)
+		movement_buffer.erase(Vector2.DOWN)
 
-	input_buffer_readout = input_buffer[-1]
-	movement = input_buffer_readout
-	if input_buffer_readout != Vector2.ZERO:
-		direction = input_buffer_readout
+	movement_buffer_readout = movement_buffer[-1]
+	movement = movement_buffer_readout
+	if movement_buffer_readout != Vector2.ZERO:
+		direction = movement_buffer_readout
 
 
 func idle():
@@ -77,6 +77,11 @@ func roll():
 
 
 func attack(primary: bool):
+	if $AttackCooldown.time_left > 0:
+		state = State.IDLE
+		return
+
+	$AttackCooldown.start()
 	animate("attack")
 	attacked.emit(primary, direction, position)
 	await Utils.timeout(self, 0.25)
@@ -84,11 +89,12 @@ func attack(primary: bool):
 
 
 func die():
+	state = State.DEAD
 	velocity = Vector2.ZERO
+	set_process_input(false)
 	dying.emit()
 	$AnimatedSprite2D.play("death")
 	$DeathSound.play()
-	set_process_input(false)
 	await Utils.timeout(self, 2)
 	died.emit()
 
@@ -102,15 +108,30 @@ func die_on_impact():
 				return
 
 			die()
-			state = State.DEAD
+
+
+func limit_camera():
+	var map: TileMap = get_node("../Map")
+	var map_rect: Rect2i = map.get_used_rect()
+	var map_size: Vector2i = map.tile_set.tile_size * Vector2i(map.scale)
+	print(map.transform.get_origin())
+
+	$Camera.limit_top = map_rect.position.y * map_size.y
+	$Camera.limit_left = map_rect.position.x * map_size.x
+	$Camera.limit_right = map_rect.end.x * map_size.x
+	$Camera.limit_bottom = map_rect.end.y * map_size.y
+
+
+# func _ready():
+# 	limit_camera()
 
 
 func _physics_process(_delta):
 	var motion: Vector2 = Input.get_vector("left", "right", "up", "down")
 
-	update_direction()
-	move_and_slide()
 	die_on_impact()
+	handle_movement()
+	move_and_slide()
 
 	if motion != Vector2.ZERO && state == State.IDLE:
 		state = State.WALK
