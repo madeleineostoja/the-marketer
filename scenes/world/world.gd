@@ -14,11 +14,11 @@ func spawn_enemy():
 	add_child(enemy)
 
 
-func spawn_attack(primary: bool, direction: Vector2, position:Vector2):
+func spawn_attack(primary: bool, direction: Vector2, pos: Vector2):
 	var attack: Attack = PrimaryAttack.instantiate() if primary else SecondaryAttack.instantiate()
 	var position_modifier: int = 65 if primary else 25
 
-	attack.position = position + (direction * position_modifier)
+	attack.position = pos + (direction * position_modifier)
 	attack.direction = direction
 	attack.animation.rotate(direction.angle())
 	add_child(attack)
@@ -56,8 +56,8 @@ func _on_player_died():
 	game_over()
 
 
-func _on_player_attacked(primary, direction, position):
-	spawn_attack(primary, direction, position)
+func _on_player_attacked(primary, direction, pos):
+	spawn_attack(primary, direction, pos)
 
 
 func _on_player_dying():

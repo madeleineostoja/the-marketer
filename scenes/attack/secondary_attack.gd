@@ -2,4 +2,4 @@ extends Attack
 
 
 func _on_body_entered(body):
-	hit_enemy(body)
+	Attack.hit_enemy(body)
