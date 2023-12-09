@@ -6,33 +6,30 @@
 [ext_resource type="AudioStream" uid="uid://chp7qtixorcyh" path="res://assets/music.mp3" id="4_0voo0"]
 [ext_resource type="PackedScene" uid="uid://cfjksrcqjw55h" path="res://scenes/hud/hud.tscn" id="5_xm0ib"]
 
-[sub_resource type="Curve2D" id="Curve2D_1xe7k"]
+[sub_resource type="Curve2D" id="Curve2D_po4es"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -1757, -906, 0, 0, 0, 0, 2915, -902, 0, 0, 0, 0, 2916, 2040, 0, 0, 0, 0, -1764, 2049, 0, 0, 0, 0, -1757, -906)
+"points": PackedVector2Array(0, 0, 0, 0, -1724.97, -798.01, 0, 0, 0, 0, 3006.11, -798.535, 0, 0, 0, 0, 3010.81, 2208.84, 0, 0, 0, 0, -1725.23, 2216.84, 0, 0, 0, 0, -1724.97, -798.01)
 }
 point_count = 5
 
 [node name="World" type="Node2D" groups=["scene_manager_entity_nodes"]]
-position = Vector2(632, 424)
+position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_5bcam")
-metadata/_edit_group_ = true
 metadata/entity_name = "World"
-
-[node name="Map" parent="." instance=ExtResource("1_6j0py")]
-position = Vector2(-670, -138)
-scale = Vector2(4, 4)
+metadata/_edit_group_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_a5tn5")]
-position = Vector2(288, 212)
+position = Vector2(1462.82, 243.097)
+
+[node name="ActiveMap" type="Node2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="Map" parent="ActiveMap" instance=ExtResource("1_6j0py")]
+scale = Vector2(4, 4)
+
+[node name="HUD" parent="." instance=ExtResource("5_xm0ib")]
 
 [node name="SpawnRate" type="Timer" parent="."]
-
-[node name="SpawnPath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_1xe7k")
-
-[node name="SpawnPathLocation" type="PathFollow2D" parent="SpawnPath"]
-position = Vector2(-1757, -906)
-rotation = 0.000856164
 
 [node name="DifficultyIncrease" type="Timer" parent="."]
 
@@ -40,11 +37,16 @@ rotation = 0.000856164
 stream = ExtResource("4_0voo0")
 volume_db = -10.0
 
-[node name="HUD" parent="." instance=ExtResource("5_xm0ib")]
+[node name="SpawnPath" type="Path2D" parent="."]
+position = Vector2(600, 4.16329e-12)
+curve = SubResource("Curve2D_po4es")
+
+[node name="SpawnPathPoint" type="PathFollow2D" parent="SpawnPath"]
+position = Vector2(-1724.97, -798.01)
+rotation = -0.000110909
 
 [connection signal="attacked" from="Player" to="." method="_on_player_attacked"]
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="dying" from="Player" to="." method="_on_player_dying"]
 [connection signal="timeout" from="SpawnRate" to="." method="_on_spawn_rate_timeout"]
 [connection signal="timeout" from="DifficultyIncrease" to="." method="_on_difficulty_increase_timeout"]
-[connection signal="timeout" from="DifficultyIncrease" to="." method="_on_survival_timer_timeout"]

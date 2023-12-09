@@ -18,7 +18,7 @@ normal = Vector2(-1, 0)
 distance = 2.33337
 
 [node name="Map" type="TileMap"]
-position = Vector2(28, 186)
+position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(3, 3)
 tile_set = ExtResource("1_6bu7y")
 format = 2

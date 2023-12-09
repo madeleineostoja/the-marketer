@@ -7,7 +7,7 @@ const SecondaryAttack = preload("res://scenes/attack/secondary_attack.tscn")
 
 func spawn_enemy():
 	var enemy = Enemy.instantiate()
-	var spawn_location = $SpawnPath/SpawnPathLocation
+	var spawn_location = $SpawnPath/SpawnPathPoint
 
 	spawn_location.progress_ratio = randf()
 	enemy.position = spawn_location.position

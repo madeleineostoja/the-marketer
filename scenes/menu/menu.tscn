@@ -39,6 +39,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.392157)
 
 [node name="Map" parent="." instance=ExtResource("2_1n44p")]
+position = Vector2(350, 200)
 
 [node name="Start" type="Button" parent="."]
 z_index = 110

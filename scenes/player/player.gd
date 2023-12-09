@@ -111,7 +111,7 @@ func die_on_impact():
 
 
 func limit_camera():
-	var map: TileMap = get_node("../Map")
+	var map: TileMap = get_node("../ActiveMap/Map")
 	var map_rect: Rect2i = map.get_used_rect()
 	var map_size: Vector2i = map.tile_set.tile_size * Vector2i(map.scale)
 	print(map.transform.get_origin())
@@ -122,8 +122,8 @@ func limit_camera():
 	$Camera.limit_bottom = map_rect.end.y * map_size.y
 
 
-# func _ready():
-# 	limit_camera()
+func _ready():
+	limit_camera()
 
 
 func _physics_process(_delta):
